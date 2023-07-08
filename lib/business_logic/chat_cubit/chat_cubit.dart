@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:meta/meta.dart';
@@ -20,7 +19,6 @@ class ChatCubit extends Cubit<ChatState> {
   setUri(Uri uri){
     this.uri = uri;
   }
-
 
   int progress=0;
 
