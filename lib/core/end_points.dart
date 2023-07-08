@@ -7,3 +7,4 @@ const allFoodEndPoint='/food';
 const profileEndPoint='/auth/profile';
 const createOrderEndPoint='/order/create';
 const profileImageEndPoint='/auth/user/update/';
+const foodFilterEndPoint='/filter/food/';

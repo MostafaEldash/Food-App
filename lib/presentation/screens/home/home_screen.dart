@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:food_ninja/business_logic/search_cubit/search_cubit.dart';
 import 'package:sizer/sizer.dart';
 import '../../../business_logic/app_cubit.dart';
 import '../../../business_logic/food_cubit/food_cubit.dart';
-import '../../../business_logic/order_cubit/order_cubit.dart';
 import '../../../business_logic/restaurants_cubit/restaurants_cubit.dart';
 import '../../styles/colors.dart';
 import '../../views/food_list_item.dart';
 import '../../views/restaurant_list_item.dart';
 import '../../widgets/default_text.dart';
+import 'package:food_ninja/core/screens_names.dart' as screens;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,9 +21,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late RestaurantsCubit restaurantsCubit;
   late FoodCubit foodCubit;
-
+  late SearchCubit searchCubit;
   @override
   void didChangeDependencies() {
+    searchCubit = SearchCubit.get(context);
     restaurantsCubit = RestaurantsCubit.get(context);
     foodCubit = FoodCubit.get(context);
     super.didChangeDependencies();
@@ -49,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     textSize: 25.sp,
                   ),
                 ),
+
                 Padding(
                   padding: EdgeInsets.only(top: 8.h, right: 2.h),
                   child: SizedBox(
@@ -69,9 +72,12 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
-              child: const SearchBar(
+              child: SearchBar(
+
                   hintText: 'What do you want to order?',
-                  leading: Icon(
+                   onTap: (){Navigator.pushNamed(context, screens.searchScreen);},
+                  backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary),
+                  leading: const Icon(
                     Icons.search,
                     color: backButtonArrow,
                   )),

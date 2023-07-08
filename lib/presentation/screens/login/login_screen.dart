@@ -131,6 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                   const DefaultText(
+                                    textColor: deepGreen,
                                     text: 'Google',
                                   ),
                                 ],
@@ -174,6 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   const Flexible(
                                     child: DefaultText(
                                       text: 'Facebook',
+                                      textColor: deepGreen,
                                     ),
                                   )
                                 ],

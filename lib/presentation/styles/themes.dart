@@ -34,6 +34,10 @@ class Themes {
         TextStyle(color: backButtonArrow),
       ),
     ),
+    textTheme: const TextTheme(
+      bodyText1: TextStyle(color: Colors.black),button: TextStyle(color: Colors.black),
+      bodyText2: TextStyle(color: Colors.black),
+    ),
   );
 
   // dark theme
@@ -65,7 +69,7 @@ class Themes {
         ),
       ),
       textTheme: const TextTheme(
-        bodyText1: TextStyle(color: Colors.white),
+        bodyText1: TextStyle(color: Colors.white),button: TextStyle(color: Colors.white),
         bodyText2: TextStyle(color: Colors.white),
       ),
       searchBarTheme: const SearchBarThemeData(

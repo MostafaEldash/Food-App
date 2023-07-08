@@ -10,6 +10,7 @@ import 'business_logic/login_cubit/login_cubit.dart';
 import 'business_logic/order_cubit/order_cubit.dart';
 import 'business_logic/registration_cubit/registration_cubit.dart';
 import 'business_logic/restaurants_cubit/restaurants_cubit.dart';
+import 'business_logic/search_cubit/search_cubit.dart';
 import 'data/data_providers/my_dio.dart';
 import 'data/local/mycache.dart';
 
@@ -51,6 +52,9 @@ class MyApp extends StatelessWidget {
               ),
               BlocProvider(
                 create: (context) => ChatCubit(),
+              ),
+              BlocProvider(
+                create: (context) => SearchCubit(),
               ),
             ],
             child: MaterialApp(

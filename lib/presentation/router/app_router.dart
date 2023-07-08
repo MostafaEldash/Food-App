@@ -20,6 +20,7 @@ import '../screens/login/login_screen.dart';
 import '../screens/onboarding/on_boarding_screen_first.dart';
 import '../screens/onboarding/on_boarding_screen_second.dart';
 import '../screens/profile_screen/profile_screen.dart';
+import '../screens/search_screen/search_screen.dart';
 import '../screens/signup/payment_method_screen.dart';
 import '../screens/signup/sign_process.dart';
 import '../screens/signup/sign_up.dart';
@@ -86,6 +87,8 @@ class AppRouter {
                 ));
       case screens.uploadPhotoScreen:
         return MaterialPageRoute(builder: (_) => const UploadPhotoScreen());
+        case screens.searchScreen:
+        return MaterialPageRoute(builder: (_) => const SearchScreen());
       case screens.uploadPhotoPreviewScreen:
         return MaterialPageRoute(
             builder: (_) => const UploadPhotoPreviewScreen());

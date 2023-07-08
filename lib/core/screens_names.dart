@@ -22,3 +22,4 @@ const confirmOrderScreen = '/confirm_order';
 const rateDriverScreen = '/rate_driver';
 const rateFoodScreen = '/rate_food_screen';
 const rateRestaurantScreen = '/rate_restaurant';
+const searchScreen = '/search_screen';

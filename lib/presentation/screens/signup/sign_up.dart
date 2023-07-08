@@ -95,7 +95,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                               controller: passwordController,
                               hintText: 'Password',
-
                             ),
                           );
                         },
