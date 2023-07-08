@@ -6,4 +6,6 @@ const Color backButtonArrow = Color(0xffDA6317);
 const Color backGroundColorBackButton = Color(0xffF9A84D);
 const Color bottomAppBarColorDark = Color(0xff0D0D0D);
 const Color deleteColor = Color(0xffFEAD1D);
+const Color setLocationButtonColor = Color(0xffF6F6F6);
+
 

@@ -3,5 +3,8 @@ enum MyCacheKeys {
   token,
   profileId,
   name,
-  email
+  email,
+  profileImage,
+  lat,
+  long
 }

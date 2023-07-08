@@ -56,6 +56,7 @@ class OrderCubit extends Cubit<OrderState> {
   }
 
   int getTotalPrice(){
+
     return totalPrice;
   }
 

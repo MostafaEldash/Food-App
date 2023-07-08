@@ -8,6 +8,8 @@ import '../../styles/colors.dart';
 import '../../views/order_list_item.dart';
 import '../../widgets/app_container.dart';
 import '../../widgets/default_text.dart';
+import 'package:food_ninja/core/screens_names.dart' as screens;
+
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -176,7 +178,9 @@ class _CartScreenState extends State<CartScreen> {
                                   borderRadius: BorderRadius.circular(15.sp)),
                               child: MaterialButton(
                                 onPressed: () {
-                                  OrderCubit.get(context).createOrders();
+                                  if(OrderCubit.listOfOrders.isNotEmpty) {
+                                    Navigator.pushNamedAndRemoveUntil(context, screens.confirmOrderScreen, (route) => false);
+                                  }
                                 },
                                 child: DefaultText(
                                   text: 'Place my order',

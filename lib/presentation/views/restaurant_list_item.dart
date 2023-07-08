@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:food_ninja/core/screens_names.dart' as screens;
 import '../../data/responses/restaurant_response/restaurant_response.dart';
 import '../widgets/default_text.dart';
-
 
 class RestaurantListItem extends StatelessWidget {
   const RestaurantListItem({super.key, required this.restaurantsData});
@@ -13,12 +12,19 @@ class RestaurantListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, screens.restaurantPreviewScreen,arguments: restaurantsData);
+      },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
         margin: EdgeInsets.all(5.sp),
         decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.2),blurStyle: BlurStyle.outer,blurRadius: 5.sp)],
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                blurStyle: BlurStyle.outer,
+                blurRadius: 5.sp)
+          ],
           color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(10.sp),
         ),

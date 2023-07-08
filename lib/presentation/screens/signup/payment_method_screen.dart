@@ -30,7 +30,12 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                DefaultBackButton(icon: Icons.arrow_back_ios_new,onPressed: (){Navigator.pop(context);},),
+                DefaultBackButton(
+                  icon: Icons.arrow_back_ios_new,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
                   child: DefaultText(
@@ -49,14 +54,17 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 2.h,horizontal: 10.w),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 2.h, horizontal: 10.w),
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.sp),
                       ),
                     ),
-                    onPressed: () {  },
+                    onPressed: () {
+                      Navigator.pushNamed(context, screens.uploadPhotoScreen);
+                    },
                     child: SizedBox(
                       height: 10.h,
                       width: 80.w,
@@ -71,12 +79,15 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 2.h,horizontal: 10.w),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 2.h, horizontal: 10.w),
                   child: SizedBox(
                     height: 10.h,
                     width: 80.w,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, screens.uploadPhotoScreen);
+                      },
                       style: OutlinedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.sp),
@@ -93,12 +104,15 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 2.h,horizontal: 10.w),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 2.h, horizontal: 10.w),
                   child: SizedBox(
                     height: 10.h,
                     width: 80.w,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, screens.uploadPhotoScreen);
+                      },
                       style: OutlinedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.sp),
@@ -121,8 +135,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                       width: 57.w,
                       heigth: 9.h,
                       onPressed: () {
-                        Navigator.pushNamed(
-                            context, screens.uploadPhotoScreen);
+                        Navigator.pushNamed(context, screens.uploadPhotoScreen);
                       },
                       child: DefaultText(
                         text: 'Next',

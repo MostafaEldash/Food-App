@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:food_ninja/core/screens_names.dart' as screens;
+import '../../../business_logic/registration_cubit/registration_cubit.dart';
 import '../../widgets/app_container.dart';
 import '../../widgets/default_back_button.dart';
 import '../../widgets/default_material_button.dart';
@@ -18,6 +19,15 @@ class UploadPhotoScreen extends StatefulWidget {
 class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  late RegistrationCubit cubit;
+
+  @override
+  void didChangeDependencies() {
+    cubit = RegistrationCubit.get(context);
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +69,9 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                           height: 15.h,
                           width: 80.w,
                           child: OutlinedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              cubit.uploadFromGalleryImage();
+                            },
                             style: OutlinedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15.sp),
@@ -81,7 +93,9 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                           height: 15.h,
                           width: 80.w,
                           child: OutlinedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              cubit.uploadCameraImage();
+                            },
                             style: OutlinedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15.sp),

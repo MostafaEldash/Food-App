@@ -44,6 +44,10 @@ dependencies:
   dio: ^5.2.1+1
   image_picker: ^0.8.9
   flutter_inappwebview: ^5.7.2+3
+  sliding_up_panel: ^2.0.0+1
+  google_maps_flutter: ^2.3.1
+  geolocator: ^9.0.2
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:

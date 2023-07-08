@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:food_ninja/core/screens_names.dart' as screens;
 import '../../widgets/app_container.dart';
 import '../../widgets/default_material_button.dart';
 import '../../widgets/default_text.dart';
@@ -35,7 +35,9 @@ class SignUpSuccessScreen extends StatelessWidget {
                 child: DefaultMaterialButton(
                   width: 57.w,
                   heigth: 9.h,
-              onPressed: () {},
+              onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(context, screens.homeLayoutScreen, (route) => false);
+              },
               child: DefaultText(
                 text: 'Try Order',
                 textColor: Colors.white,

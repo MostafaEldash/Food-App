@@ -10,7 +10,7 @@ class Themes {
         const InputDecorationTheme(labelStyle: TextStyle(color: Colors.green)),
     colorScheme: const ColorScheme.light(
       primary: Colors.white,
-      secondary: backButtonArrow,
+      secondary: setLocationButtonColor,
     ),
     iconTheme: const IconThemeData(color: lightGreen),
     buttonTheme: const ButtonThemeData(buttonColor: lightGreen),
@@ -42,7 +42,7 @@ class Themes {
           labelStyle: TextStyle(color: Colors.white)),
       colorScheme: const ColorScheme.light(
         primary: bottomAppBarColorDark,
-        secondary: deepGreen,
+        secondary: labelGrey,
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         unselectedItemColor: Colors.white,

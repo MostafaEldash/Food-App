@@ -139,13 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 5.w),
                 child: ListView.separated(
                   itemBuilder: (context, index) => FoodListItem(
-                    onPressed: () {
-                      if(!OrderCubit.listOfOrders.contains(foodCubit.allFoodResponse.data[index])) {
-                        OrderCubit.get(context).addOrderToList(
-                        foodCubit.allFoodResponse.data[index],
-                      );
-                      }
-                    },
+                    index: index,
                     allFoodData: foodCubit.allFoodResponse.data[index],
                   ),
                   itemCount: foodCubit.allFoodResponse.data.length,

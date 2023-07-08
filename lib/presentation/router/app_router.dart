@@ -1,6 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:food_ninja/core/screens_names.dart' as screens;
+import 'package:food_ninja/presentation/screens/cart_screen/confirm_order.dart';
+import 'package:food_ninja/presentation/screens/cart_screen/rate_driver.dart';
+import 'package:food_ninja/presentation/screens/cart_screen/rate_food_screen.dart';
+import 'package:food_ninja/presentation/screens/cart_screen/rate_restaurant.dart';
+import 'package:food_ninja/presentation/screens/food_preview_screen/food_preview_screen.dart';
+import 'package:food_ninja/presentation/screens/restaurant_preview_screen/restaurant_preview_screen.dart';
+import 'package:food_ninja/presentation/screens/set_location/map_screen.dart';
+import 'package:food_ninja/presentation/screens/set_location/set_location_screen.dart';
+import 'package:food_ninja/presentation/screens/shipping_screen/shipping_screen.dart';
+import '../../data/responses/all_food_response/all_food_response.dart';
+import '../../data/responses/restaurant_response/restaurant_response.dart';
 import '../screens/cart_screen/cart_screen.dart';
 import '../screens/chat_screen/chat_screen.dart';
 import '../screens/home/home_screen.dart';
@@ -34,6 +45,10 @@ class AppRouter {
             builder: (_) => const OnBoardingScreenSecond());
       case screens.signUpScreen:
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
+      case screens.setLocationScreen:
+        return MaterialPageRoute(builder: (_) => const SetLocationScreen());
+      case screens.mapScreen:
+        return MaterialPageRoute(builder: (_) => const MapScreen());
       case screens.signUpSuccessScreen:
         return MaterialPageRoute(builder: (_) => const SignUpSuccessScreen());
       case screens.loginScreen:
@@ -42,18 +57,33 @@ class AppRouter {
         final Map data = settings.arguments as Map;
         final String password = data['password'];
         final String email = data['email'];
-        final bool keepMeSigned= data['keepMeSigned'];
-        if (kDebugMode) {
-          print(data);
-        }
+        final bool keepMeSigned = data['keepMeSigned'];
         return MaterialPageRoute(
             builder: (_) => SignUpProcess(
                   email: email,
                   password: password,
-              keepMeSigned: keepMeSigned,
+                  keepMeSigned: keepMeSigned,
                 ));
       case screens.signUpPaymentMethodScreen:
         return MaterialPageRoute(builder: (_) => const PaymentMethodScreen());
+      case screens.confirmOrderScreen:
+        return MaterialPageRoute(builder: (_) => const ConfirmOrder());
+      case screens.restaurantPreviewScreen:
+        final RestaurantsData restaurantsData =
+            settings.arguments as RestaurantsData;
+        return MaterialPageRoute(
+            builder: (_) => RestaurantPreviewScreen(
+                  restaurantsData: restaurantsData,
+                ));
+      case screens.foodPreviewScreen:
+        final Map data = settings.arguments as Map;
+        final AllFoodData allFoodData = data['allFoodData'];
+        final int index = data['index'];
+        return MaterialPageRoute(
+            builder: (_) => FoodPreviewScreen(
+                  allFoodData: allFoodData,
+                  index: index,
+                ));
       case screens.uploadPhotoScreen:
         return MaterialPageRoute(builder: (_) => const UploadPhotoScreen());
       case screens.uploadPhotoPreviewScreen:
@@ -61,14 +91,20 @@ class AppRouter {
             builder: (_) => const UploadPhotoPreviewScreen());
       case screens.homeLayoutScreen:
         return MaterialPageRoute(builder: (_) => const HomeLayout());
-        case screens.homeScreen:
+      case screens.homeScreen:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
-        case screens.profileScreen:
+      case screens.profileScreen:
         return MaterialPageRoute(builder: (_) => const ProfileScreen());
-        case screens.cartScreen:
+      case screens.cartScreen:
         return MaterialPageRoute(builder: (_) => const CartScreen());
-        case screens.chatScreen:
+      case screens.chatScreen:
         return MaterialPageRoute(builder: (_) => const ChatScreen());
+      case screens.rateDriverScreen:
+        return MaterialPageRoute(builder: (_) => const RateDriverScreen());
+      case screens.rateFoodScreen:
+        return MaterialPageRoute(builder: (_) => const RateFoodScreen());
+      case screens.rateRestaurantScreen:
+        return MaterialPageRoute(builder: (_) => const RateRestaurantScreen());
       default:
         return null;
     }
