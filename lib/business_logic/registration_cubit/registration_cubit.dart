@@ -51,6 +51,8 @@ class RegistrationCubit extends Cubit<RegistrationState> {
         .then((value) {
       registrationResponse = value;
       if (keepMeSigned) {
+        MyCache.putString(key: MyCacheKeys.name, value: name);
+        MyCache.putString(key: MyCacheKeys.email, value: email);
         MyCache.putString(
             key: MyCacheKeys.token, value: registrationResponse.token);
         MyCache.putString(

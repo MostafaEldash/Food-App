@@ -22,6 +22,8 @@ class DefaultTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style:
+        TextStyle(color: lightGreen),
       obscureText: isHidden ?? false,
       obscuringCharacter: '*',
       cursorColor: deepGreen,

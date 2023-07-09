@@ -73,8 +73,9 @@ class OrderCubit extends Cubit<OrderState> {
   void createOrders(){
     for(int i = 0;i<listOfOrders.length;i++){
       createOrder(quantity: listOfQuantities[i], id: listOfOrders[i].id);
-      removeOrderFromList(index: i);
     }
+    listOfOrders.clear();
+    listOfQuantities.clear();
   }
 
 }

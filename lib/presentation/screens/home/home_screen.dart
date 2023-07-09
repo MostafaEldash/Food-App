@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:food_ninja/business_logic/search_cubit/search_cubit.dart';
 import 'package:sizer/sizer.dart';
@@ -25,8 +26,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     searchCubit = SearchCubit.get(context);
-    restaurantsCubit = RestaurantsCubit.get(context);
-    foodCubit = FoodCubit.get(context);
+    restaurantsCubit = RestaurantsCubit.get(context)..getRestaurants();
+    foodCubit = FoodCubit.get(context)..getAllFood();
     super.didChangeDependencies();
   }
 
@@ -38,131 +39,264 @@ class _HomeScreenState extends State<HomeScreen> {
           AppCubit.get(context).background[1],
           fit: BoxFit.fill,
         ),
-        Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 8.h, left: 5.w),
-                  child: DefaultText(
-                    text: 'Find Your\nFavorite Food',
-                    weight: FontWeight.bold,
-                    textSize: 25.sp,
+        SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 8.h, left: 5.w),
+                    child: DefaultText(
+                      text: 'Find Your\nFavorite Food',
+                      weight: FontWeight.bold,
+                      textSize: 25.sp,
+                    ),
                   ),
-                ),
-
-                Padding(
-                  padding: EdgeInsets.only(top: 8.h, right: 2.h),
-                  child: SizedBox(
-                    width: 7.h,
-                    height: 7.h,
+                  Padding(
+                    padding: EdgeInsets.only(top: 8.h, right: 2.h),
                     child: MaterialButton(
                         onPressed: () {
-                          // TO DO:
+                          Navigator.pushNamed(
+                              context, screens.notificationsScreen);
                         },
                         color: Theme.of(context).colorScheme.primary,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.sp)),
                         child:
                             SvgPicture.asset('assets/Icon Notifiaction.svg')),
-                  ),
-                )
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
-              child: SearchBar(
-
-                  hintText: 'What do you want to order?',
-                   onTap: (){Navigator.pushNamed(context, screens.searchScreen);},
-                  backgroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary),
-                  leading: const Icon(
-                    Icons.search,
-                    color: backButtonArrow,
-                  )),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5.w),
-                  child: DefaultText(
-                    text: 'popular restaurants',
-                    weight: FontWeight.bold,
-                    textSize: 15.sp,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5.w),
-                  child: const DefaultText(
-                    text: 'view',
-                    style: TextStyle(decoration: TextDecoration.underline),
-                    textColor: backButtonArrow,
-                  ),
-                ),
-              ],
-            ),
-            Flexible(
-              child: Padding(
-                padding: EdgeInsets.all(8.sp),
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => RestaurantListItem(
-                    restaurantsData:
-                        restaurantsCubit.restaurantsResponse.data[index],
-                  ),
-                  itemCount: restaurantsCubit.restaurantsResponse.data.length,
-                  separatorBuilder: (context, index) => const VerticalDivider(
-                    color: Colors.transparent,
-                  ),
-                ),
+                  )
+                ],
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 5.w),
-                  child: DefaultText(
-                    text: 'Popular Menu',
-                    weight: FontWeight.bold,
-                    textSize: 15.sp,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+                child: SearchBar(
+                    hintText: 'What do you want to order?',
+                    onTap: () {
+                      Navigator.pushNamed(context, screens.searchScreen);
+                    },
+                    backgroundColor: MaterialStatePropertyAll(
+                        Theme.of(context).colorScheme.primary),
+                    leading: const Icon(
+                      Icons.search,
+                      color: backButtonArrow,
+                    ),),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+                child: Container(
+                  width: 90.w,
+                  height: 20.h,
+                  decoration: BoxDecoration(
+                    color: lightGreen,
+                    borderRadius: BorderRadius.circular(15.sp),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 5.w),
-                  child: const DefaultText(
-                    text: 'view',
-                    style: TextStyle(decoration: TextDecoration.underline),
-                    textColor: backButtonArrow,
-                  ),
-                ),
-              ],
-            ),
-            Flexible(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5.w),
-                child: ListView.separated(
-                  itemBuilder: (context, index) => FoodListItem(
-                    index: index,
-                    allFoodData: foodCubit.allFoodResponse.data[index],
-                  ),
-                  itemCount: foodCubit.allFoodResponse.data.length,
-                  separatorBuilder: (context, index) => Row(
+                  child: Stack(
                     children: [
-                      Expanded(
-                        child: Divider(
-                          height: 1.h,
-                          color: Colors.transparent,
-                        ),
+                      Image.asset(
+                        'assets/ice_ream_voucher.png',
+                        fit: BoxFit.fill,
                       ),
+                      Padding(
+                        padding: EdgeInsets.only(right: 4.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 3.h),
+                                  child: DefaultText(
+                                    text: 'Special Deal for\njuly',
+                                    weight: FontWeight.bold,
+                                    textColor: Colors.white,
+                                    textSize: 15.sp,
+                                  ),
+                                ),
+                                MaterialButton(
+                                  onPressed: () {},
+                                  color: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(12.sp)),
+                                  child: const DefaultText(
+                                    text: 'Buy Now',
+                                    textColor: lightGreen,
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ),
               ),
-            ),
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5.w),
+                    child: DefaultText(
+                      text: 'popular restaurants',
+                      weight: FontWeight.bold,
+                      textSize: 15.sp,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5.w),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, screens.popularRestaurantsScreen);
+                      },
+                      child: const DefaultText(
+                        text: 'view',
+                        style: TextStyle(decoration: TextDecoration.underline),
+                        textColor: backButtonArrow,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.all(8.sp),
+                child: SizedBox(
+                  height: 30.h,
+                  child: BlocBuilder<RestaurantsCubit, RestaurantsState>(
+                    builder: (context, state) {
+                      if (state is RestaurantLoadingState) {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: lightGreen,
+                          ),
+                        );
+                      } else if (state is RestaurantSuccessState) {
+                        return ListView.separated(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) => RestaurantListItem(
+                            restaurantsData: restaurantsCubit
+                                .restaurantsResponse.data[index],
+                          ),
+                          itemCount:
+                              restaurantsCubit.restaurantsResponse.data.length,
+                          separatorBuilder: (context, index) =>
+                              const VerticalDivider(
+                            color: Colors.transparent,
+                          ),
+                        );
+                      } else {
+                        return Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.error,
+                                color: Colors.red,
+                                size: 75.sp,
+                              ),
+                              DefaultText(
+                                text: 'Error Occurred!',
+                                textColor: Colors.white,
+                                textSize: 25.sp,
+                                weight: FontWeight.bold,
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 1.h, horizontal: 5.w),
+                    child: DefaultText(
+                      text: 'Popular Menu',
+                      weight: FontWeight.bold,
+                      textSize: 15.sp,
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 1.h, horizontal: 5.w),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, screens.popularMenuScreen);
+                      },
+                      child: const DefaultText(
+                        text: 'view',
+                        style: TextStyle(decoration: TextDecoration.underline),
+                        textColor: backButtonArrow,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.w),
+                child: BlocBuilder<FoodCubit, FoodState>(
+                  builder: (context, state) {
+                    if (state is AllFoodLoadingState) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: lightGreen,
+                        ),
+                      );
+                    } else if (state is AllFoodSuccessState) {
+                      return ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) => FoodListItem(
+                          index: index,
+                          allFoodData: foodCubit.allFoodResponse.data[index],
+                        ),
+                        itemCount: foodCubit.allFoodResponse.data.length,
+                        separatorBuilder: (context, index) => Row(
+                          children: [
+                            Expanded(
+                              child: Divider(
+                                height: 1.h,
+                                color: Colors.transparent,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.error,
+                              color: Colors.red,
+                              size: 75.sp,
+                            ),
+                            DefaultText(
+                              text: 'Error Occurred!',
+                              textColor: Colors.white,
+                              textSize: 25.sp,
+                              weight: FontWeight.bold,
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );

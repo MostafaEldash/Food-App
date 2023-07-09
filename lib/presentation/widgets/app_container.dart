@@ -8,14 +8,14 @@ class AppContainer extends StatelessWidget {
   final Widget child;
   @override
   Widget build(BuildContext context) {
-    return  ClipRRect(
+    return ClipRRect(
         borderRadius: BorderRadius.circular(15.sp),
         child: Container(
-          decoration: const BoxDecoration(
-        gradient: LinearGradient(
-        colors: [lightGreen,deepGreen],
-    ),
-    ),
-          child: child));
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [lightGreen, deepGreen],
+              ),
+            ),
+            child: child));
   }
 }

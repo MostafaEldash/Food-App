@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_ninja/business_logic/food_cubit/food_cubit.dart';
 import 'package:food_ninja/data/responses/all_food_response/all_food_response.dart';
 import 'package:sizer/sizer.dart';
@@ -11,7 +12,8 @@ import '../../widgets/default_material_button.dart';
 import '../../widgets/default_text.dart';
 
 class FoodPreviewScreen extends StatefulWidget {
-  const FoodPreviewScreen({super.key, required this.allFoodData, required this.index});
+  const FoodPreviewScreen(
+      {super.key, required this.allFoodData, required this.index});
   final AllFoodData allFoodData;
   final int index;
   @override
@@ -19,14 +21,13 @@ class FoodPreviewScreen extends StatefulWidget {
 }
 
 class _FoodPreviewScreenState extends State<FoodPreviewScreen> {
-
   late FoodCubit foodCubit;
 
   @override
   void didChangeDependencies() {
     foodCubit = FoodCubit.get(context);
     print(widget.index);
-        super.didChangeDependencies();
+    super.didChangeDependencies();
   }
 
   @override
@@ -34,6 +35,10 @@ class _FoodPreviewScreenState extends State<FoodPreviewScreen> {
     return Scaffold(
       body: Stack(
         children: [
+          SizedBox(
+              width: 100.w,
+              height: 60.h,
+              child: Image.asset('assets/photo_menu.png', fit: BoxFit.cover)),
           SlidingUpPanel(
             borderRadius: BorderRadius.circular(20.sp),
             maxHeight: 95.h,
@@ -56,19 +61,26 @@ class _FoodPreviewScreenState extends State<FoodPreviewScreen> {
                             thickness: 5.sp)),
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: 5.w),
-                  child: Container(
-                    padding: EdgeInsets.all(5.sp),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(18.5),
-                      color: backButtonArrow.withOpacity(0.1),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 5.w),
+                      child: Container(
+                        padding: EdgeInsets.all(5.sp),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(18.5),
+                          color: lightGreen.withOpacity(0.1),
+                        ),
+                        child: const DefaultText(
+                          text: 'Popular',
+                          textColor: lightGreen,
+                          weight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                    child: const DefaultText(
-                      text: 'Popular',
-                      weight: FontWeight.bold,
-                    ),
-                  ),
+
+                  ],
                 ),
                 Padding(
                   padding:
@@ -94,6 +106,14 @@ class _FoodPreviewScreenState extends State<FoodPreviewScreen> {
                     ],
                   ),
                 ),
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 2.h, horizontal: 10.w),
+                  child: DefaultText(
+                    text: widget.allFoodData.description,
+                    textSize: 12.sp,
+                  ),
+                )
               ],
             ),
           ),
@@ -103,30 +123,30 @@ class _FoodPreviewScreenState extends State<FoodPreviewScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 12.h,bottom: 10.h),
+                  padding: EdgeInsets.only(top: 12.h, bottom: 10.h),
                   child: AppContainer(
                       child: DefaultMaterialButton(
-                        width: 57.w,
-                        heigth: 9.h,
-                        onPressed: () {
-                          if(!OrderCubit.listOfOrders.contains(foodCubit.allFoodResponse.data[widget.index])) {
-                            OrderCubit.get(context).addOrderToList(
-                              foodCubit.allFoodResponse.data[widget.index],
-                            );
-
-                          }
-                        },
-                        child: DefaultText(
-                          text: 'Add To Chart',
-                          textColor: Colors.white,
-                          textSize: 15.sp,
-                        ),
-                      )),
+                    width: 57.w,
+                    heigth: 9.h,
+                    onPressed: () {
+                      if (!OrderCubit.listOfOrders.contains(
+                          foodCubit.allFoodResponse.data[widget.index])) {
+                        OrderCubit.get(context).addOrderToList(
+                          foodCubit.allFoodResponse.data[widget.index],
+                        );
+                        Navigator.pop(context);
+                      }
+                    },
+                    child: DefaultText(
+                      text: 'Add To Chart',
+                      textColor: Colors.white,
+                      textSize: 15.sp,
+                    ),
+                  )),
                 ),
               ],
             ),
           )
-
         ],
       ),
     );

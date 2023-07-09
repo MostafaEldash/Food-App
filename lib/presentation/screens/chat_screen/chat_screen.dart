@@ -16,7 +16,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
  @override
   void didChangeDependencies() {
-    cubit=ChatCubit.get(context);
+    cubit = ChatCubit.get(context);
     super.didChangeDependencies();
   }
 
@@ -24,16 +24,9 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(bottom: 9.h,top: 5.h),
-      child: WillPopScope(
-        onWillPop: () async{
-          if(await ChatCubit.get(context).controller.canGoBack()){
-            cubit.controller.goBack();
-            return false;
-          }else{
-            return true;
-          }
-        },
-        child: InAppWebView(
+      child: Stack(
+        children: [
+          InAppWebView(
           initialUrlRequest: URLRequest(url: ChatCubit.get(context).uri),
           onWebViewCreated: (controller) {
             ChatCubit.get(context).setController(controller);
@@ -44,8 +37,8 @@ class _ChatScreenState extends State<ChatScreen> {
           onLoadStop: (controller, url) {
             ChatCubit.get(context).setUri(url!);
           },
-
         ),
+        ]
       ),
     );
   }

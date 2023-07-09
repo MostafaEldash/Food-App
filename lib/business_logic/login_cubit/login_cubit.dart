@@ -7,7 +7,6 @@ import '../../data/local/mycache.dart';
 import '../../data/requests/login_request/login_request.dart';
 import '../../data/responses/login_response/login_response.dart';
 
-
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -16,21 +15,27 @@ class LoginCubit extends Cubit<LoginState> {
 
   LoginResponse loginResponse = LoginResponse();
 
-  void login({required String email, required String password
-  ,required BuildContext context
-  }){
+  bool login(
+      {required String email,
+      required String password,
+      required BuildContext context}) {
     emit(LoginLoadingState());
-    LoginRequest().loginRequest(email: email, password: password).then((value)  {
+    LoginRequest().loginRequest(email: email, password: password).then((value) {
       loginResponse = value;
       MyCache.putString(key: MyCacheKeys.token, value: loginResponse.token);
       MyCache.putString(key: MyCacheKeys.name, value: loginResponse.user.name);
-      MyCache.putString(key: MyCacheKeys.email, value: loginResponse.user.email);
-      MyCache.putString(key: MyCacheKeys.profileId, value: loginResponse.user.id.toString());
-      Navigator.pushNamedAndRemoveUntil(context, screens.homeLayoutScreen, (route) => false);
+      MyCache.putString(
+          key: MyCacheKeys.email, value: loginResponse.user.email);
+      MyCache.putString(
+          key: MyCacheKeys.profileId, value: loginResponse.user.id.toString());
+      Navigator.pushNamedAndRemoveUntil(
+          context, screens.homeLayoutScreen, (route) => false);
       emit(LoginSuccessState());
+      return loginResponse.status;
     }).catchError((error) {
       emit(LoginFailedState());
-    }
-    );
+      return loginResponse.status;
+    });
+    return loginResponse.status;
   }
 }

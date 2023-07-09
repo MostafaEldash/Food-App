@@ -179,7 +179,7 @@ class _CartScreenState extends State<CartScreen> {
                               child: MaterialButton(
                                 onPressed: () {
                                   if(OrderCubit.listOfOrders.isNotEmpty) {
-                                    Navigator.pushNamedAndRemoveUntil(context, screens.confirmOrderScreen, (route) => false);
+                                    Navigator.pushNamed(context, screens.confirmOrderScreen);
                                   }
                                 },
                                 child: DefaultText(

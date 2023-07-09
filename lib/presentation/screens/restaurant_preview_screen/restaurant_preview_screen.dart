@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:food_ninja/core/constants_methods.dart';
 import 'package:sizer/sizer.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
 import '../../../core/my_cache_keys.dart';
 import '../../../data/local/mycache.dart';
 import '../../../data/responses/restaurant_response/restaurant_response.dart';
@@ -25,6 +24,11 @@ class _RestaurantPreviewScreenState extends State<RestaurantPreviewScreen> {
     return Scaffold(
       body: Stack(
         children: [
+          SizedBox(
+              width: 100.w,
+              height: 60.h,
+              child: Image.asset('assets/photo_restaurant.png',
+                  fit: BoxFit.cover)),
           SlidingUpPanel(
             borderRadius: BorderRadius.circular(20.sp),
             maxHeight: 95.h,

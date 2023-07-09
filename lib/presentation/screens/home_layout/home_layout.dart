@@ -16,16 +16,12 @@ class HomeLayout extends StatefulWidget {
 }
 
 class _HomeLayoutState extends State<HomeLayout> {
-
   late AppCubit cubit;
-  late RestaurantsCubit restaurantsCubit;
-  late FoodCubit foodCubit;
 
   @override
   void didChangeDependencies() {
     cubit = AppCubit.get(context);
-    restaurantsCubit = RestaurantsCubit.get(context)..getRestaurants();
-    foodCubit = FoodCubit.get(context)..getAllFood();
+
     super.didChangeDependencies();
   }
 
@@ -37,40 +33,20 @@ class _HomeLayoutState extends State<HomeLayout> {
           extendBody: true,
           body: BlocBuilder<RestaurantsCubit, RestaurantsState>(
             builder: (BuildContext context, state) {
-              if (state is RestaurantLoadingState ||state is AllFoodLoadingState){
-                return const Center(
-                  child: CircularProgressIndicator(
-                    color: lightGreen,
-                  ),
-                );
-              } else if (state is RestaurantSuccessState || state is AllFoodSuccessState) {
-                return cubit.bottomNavBarScreens[cubit.currentIndex];
-              } else{
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.error,
-                        color: Colors.red,
-                        size: 75.sp,
-                      ),
-                      DefaultText(
-                        text: 'Error Occurred!',
-                        textColor: Colors.white,
-                        textSize: 25.sp,
-                        weight: FontWeight.bold,
-                      ),
-                    ],
-                  ),
-                );
-              }
+              return cubit.bottomNavBarScreens[cubit.currentIndex];
             },
           ),
           bottomNavigationBar: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.sp, vertical: 10.sp),
             child: Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.sp),boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.2),blurStyle: BlurStyle.outer,blurRadius: 5.sp)]),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.sp),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        blurStyle: BlurStyle.outer,
+                        blurRadius: 5.sp)
+                  ]),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20.sp),
                 child: BottomAppBar(
@@ -92,8 +68,8 @@ class _HomeLayoutState extends State<HomeLayout> {
                           icon: SvgPicture.asset('assets/Buy.svg'),
                           label: cubit.appBarTitles[2]),
                       BottomNavigationBarItem(
-                          icon: SvgPicture.asset('assets/Chat.svg'),
-                          label: cubit.appBarTitles[3],
+                        icon: SvgPicture.asset('assets/Chat.svg'),
+                        label: cubit.appBarTitles[3],
                       )
                     ],
                   ),
@@ -101,7 +77,6 @@ class _HomeLayoutState extends State<HomeLayout> {
               ),
             ),
           ),
-
         );
       },
     );

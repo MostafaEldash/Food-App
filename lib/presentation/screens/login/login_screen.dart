@@ -34,12 +34,12 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Form(
-          key: formKey,
-          child: BackGround(
-            index: 0,
-            children: [
-              Center(
+        child: BackGround(
+          index: 0,
+          children: [
+            Center(
+              child: Form(
+                key: formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -112,6 +112,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                         textColor: Colors.white,
                                         fontSize: 16.sp);
                                   });
+                                  Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      screens.homeLayoutScreen,
+                                      (route) => false);
                                 }
                               },
                               style: OutlinedButton.styleFrom(
@@ -209,10 +213,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: 57.w,
                           heigth: 9.h,
                           onPressed: () {
-                            cubit.login(
-                                email: emailController.text,
-                                password: passwordController.text,
-                                context: context);
+                            if (formKey.currentState!.validate()) {
+                              cubit.login(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  context: context);
+                            }
                           },
                           child: DefaultText(
                             text: 'Login',
@@ -225,8 +231,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

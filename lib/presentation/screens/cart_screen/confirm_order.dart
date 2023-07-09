@@ -73,10 +73,26 @@ class _ConfirmOrderState extends State<ConfirmOrder> {
                       child: Column(
                         children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 2.w,vertical: 1.h),
                                 child: DefaultText(text: 'Deliver to',textColor: Colors.grey,textSize: 12.sp,),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, screens.shippingScreen);
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.all(2.h),
+                                  child: DefaultText(
+                                    text: 'Edit',
+                                    textColor: lightGreen,
+                                    style: TextStyle(
+                                        decoration: TextDecoration.underline),
+                                  ),
+                                ),
                               )
                             ],
                           ),
@@ -115,11 +131,27 @@ class _ConfirmOrderState extends State<ConfirmOrder> {
                       child: Column(
                         children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 2.w,vertical: 1.h),
                                 child: DefaultText(text: 'Payment Method',textColor: Colors.grey,textSize: 12.sp,),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                 //TODO:
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.all(2.h),
+                                  child: DefaultText(
+                                    text: 'Edit',
+                                    textColor: lightGreen,
+                                    style: TextStyle(
+                                        decoration: TextDecoration.underline),
+                                  ),
+                                ),
                               )
+
                             ],
                           ),
                           Row(
@@ -245,8 +277,7 @@ class _ConfirmOrderState extends State<ConfirmOrder> {
                                       borderRadius: BorderRadius.circular(15.sp)),
                                   child: MaterialButton(
                                     onPressed: () {
-                                      OrderCubit.get(context).createOrders();
-                                      Navigator.pushNamedAndRemoveUntil(context, screens.rateDriverScreen, (route) => false);
+                                      Navigator.pushNamed(context, screens.vouchersScreen,);
                                     },
                                     child: DefaultText(
                                       text: 'Place my order',

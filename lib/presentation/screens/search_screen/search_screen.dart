@@ -70,7 +70,6 @@ class _SearchScreenState extends State<SearchScreen> {
                     textStyle: const MaterialStatePropertyAll(
                         TextStyle(color: backButtonArrow)),
                     controller: searchController,
-
                     hintText: 'What do you want to order?',
                     onChanged: (value) {
                       searchCubit.getFoodWithName(foodName: value);

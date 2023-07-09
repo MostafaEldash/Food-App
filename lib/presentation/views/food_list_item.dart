@@ -16,10 +16,15 @@ class FoodListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, screens.foodPreviewScreen, arguments: {
-          'allFoodData': allFoodData,
-          'index': index,
-        });
+        print(allFoodData.pic);
+        Navigator.pushNamed(
+          context,
+          screens.foodPreviewScreen,
+          arguments: {
+            'allFoodData': allFoodData,
+            'index': index,
+          },
+        );
       },
       child: Container(
         margin: EdgeInsets.all(5.sp),
@@ -45,6 +50,8 @@ class FoodListItem extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    Icon(Icons.fastfood_rounded,color: deepGreen,),
+
                     Column(
                       children: [
                         DefaultText(
