@@ -29,3 +29,4 @@ const shippingScreen = 'shipping_screen';
 const orderMapScreen = 'order_map_screen';
 const popularRestaurantsScreen = 'popular_restaurants_screen';
 const popularMenuScreen = 'popular_menu_screen';
+const editPaymentScreen = 'edit_payment_screen';

@@ -5,6 +5,7 @@ import 'package:food_ninja/presentation/screens/cart_screen/order_map_screen.dar
 import 'package:food_ninja/presentation/screens/cart_screen/rate_driver.dart';
 import 'package:food_ninja/presentation/screens/cart_screen/rate_food_screen.dart';
 import 'package:food_ninja/presentation/screens/cart_screen/rate_restaurant.dart';
+import 'package:food_ninja/presentation/screens/edit_payment_screen/edit_payment_screen.dart';
 import 'package:food_ninja/presentation/screens/food_preview_screen/food_preview_screen.dart';
 import 'package:food_ninja/presentation/screens/notifications_screen/notification_screen.dart';
 import 'package:food_ninja/presentation/screens/popular_restaurants_screen/popular_restaurants_screen.dart';
@@ -15,7 +16,6 @@ import 'package:food_ninja/presentation/screens/shipping_screen/shipping_screen.
 import '../../data/responses/all_food_response/all_food_response.dart';
 import '../../data/responses/restaurant_response/restaurant_response.dart';
 import '../screens/cart_screen/cart_screen.dart';
-import '../screens/chat_screen/chat_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/home_layout/home_layout.dart';
 import '../screens/login/login_screen.dart';
@@ -121,6 +121,9 @@ class AppRouter {
       case screens.popularRestaurantsScreen:
         return MaterialPageRoute(
             builder: (_) => const PopularRestaurantsScreen());
+        case screens.editPaymentScreen:
+        return MaterialPageRoute(
+            builder: (_) => const EditPaymentScreen());
       case screens.popularMenuScreen:
         return MaterialPageRoute(builder: (_) => const PopularMenuScreen());
       case screens.orderMapScreen:

@@ -139,7 +139,7 @@ class _ConfirmOrderState extends State<ConfirmOrder> {
                               ),
                               InkWell(
                                 onTap: () {
-                                 //TODO:
+                                 Navigator.pushNamed(context, screens.editPaymentScreen);
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.all(2.h),
@@ -158,7 +158,7 @@ class _ConfirmOrderState extends State<ConfirmOrder> {
                             children: [
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 2.w),
-                                child: SvgPicture.asset('assets/Payoneer_logo 1.svg',color: Colors.white,),
+                                child: SvgPicture.asset('assets/Payoneer_logo 1.svg',),
                               ),
                               DefaultText(
                                 textColor: Colors.grey,

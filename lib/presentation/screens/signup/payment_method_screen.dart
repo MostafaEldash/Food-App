@@ -72,7 +72,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SvgPicture.asset('assets/paypal-2 (1) 1.svg'),
+                          SvgPicture.asset('assets/paypal.svg'),
                         ],
                       ),
                     ),
@@ -97,7 +97,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SvgPicture.asset('assets/visa (1) 1.svg'),
+                          SvgPicture.asset('assets/visa.svg'),
                         ],
                       ),
                     ),
