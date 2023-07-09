@@ -50,18 +50,24 @@ class FoodListItem extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(Icons.fastfood_rounded,color: deepGreen,),
-
-                    Column(
+                    Row(
                       children: [
-                        DefaultText(
-                          text: allFoodData.name,
-                          textSize: 15.sp,
-                          weight: FontWeight.bold,
+                        Padding(
+                          padding: EdgeInsets.only(right: 2.w),
+                          child: Icon(Icons.fastfood_rounded,color: deepGreen,),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(right: 10.w),
+                          child: DefaultText(
+                            text: allFoodData.name,
+                            textSize: 15.sp,
+                            weight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),
-                    Row(
+
+                    Row(mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         DefaultText(
                           text: "${allFoodData.price}\$",
