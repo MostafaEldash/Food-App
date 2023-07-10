@@ -36,4 +36,16 @@ class MyDio{
     dio!.options.headers['Authorization'] = 'Bearer $bearerToken';
     return await dio!.post(endPoint, queryParameters: query, data: data,);
   }
+
+  static Future<Response> postImage({
+    required String endPoint,
+    Map<String, dynamic>? query,
+    Map<String, dynamic>? data,
+  }) async{
+    dio!.options.headers = {
+      'Content-Type': 'multipart/form-data'
+    };
+    dio!.options.headers['Authorization'] = 'Bearer $bearerToken';
+    return await dio!.post(endPoint, queryParameters: query, data: data,);
+  }
 }

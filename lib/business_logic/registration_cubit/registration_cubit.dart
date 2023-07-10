@@ -17,10 +17,10 @@ class RegistrationCubit extends Cubit<RegistrationState> {
   static RegistrationCubit get(context) =>
       BlocProvider.of<RegistrationCubit>(context);
 
-  RegistrationResponse registrationResponse = RegistrationResponse();
+ static RegistrationResponse registrationResponse = RegistrationResponse();
   ProfileImageResponse profileImageResponse = ProfileImageResponse();
 
-  static File image=File('');
+  static File image = File('');
 
   final imagePicker = ImagePicker();
 
@@ -28,6 +28,7 @@ class RegistrationCubit extends Cubit<RegistrationState> {
     var pickedImage = await imagePicker.pickImage(source: ImageSource.camera);
     if (pickedImage != null) {
       image = File(pickedImage.path);
+      MyCache.putString(key: MyCacheKeys.profileImage, value: image.path);
     }
   }
 
@@ -35,6 +36,7 @@ class RegistrationCubit extends Cubit<RegistrationState> {
     var pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       image = File(pickedImage.path);
+      MyCache.putString(key: MyCacheKeys.profileImage, value: image.path);
     }
   }
 
@@ -50,27 +52,25 @@ class RegistrationCubit extends Cubit<RegistrationState> {
             mobile: mobile, email: email, password: password, name: name)
         .then((value) {
       registrationResponse = value;
-      if (keepMeSigned) {
-        MyCache.putString(key: MyCacheKeys.name, value: name);
-        MyCache.putString(key: MyCacheKeys.email, value: email);
-        MyCache.putString(
-            key: MyCacheKeys.token, value: registrationResponse.token);
-        MyCache.putString(
-            key: MyCacheKeys.profileId,
-            value: registrationResponse.data.id.toString());
-      }
+      MyCache.putString(key: MyCacheKeys.name, value: name);
+      MyCache.putString(key: MyCacheKeys.email, value: email);
+      MyCache.putString(
+          key: MyCacheKeys.token, value: value.token);
+      MyCache.putString(
+          key: MyCacheKeys.profileId,
+          value: value.data.id.toString());
       emit(RegistrationSuccessState());
     }).catchError((error) {
       emit(RegistrationFailedState());
-    });
+    }
+    );
   }
 
   void uploadPhoto() {
     emit(ImageLoadingState());
-    ProfileImageRequest().profileImageRequest()
-        .then((value) {
+    ProfileImageRequest().profileImageRequest().then((value) {
+      print(image.path);
       profileImageResponse = value;
-      MyCache.putString(key: MyCacheKeys.profileImage, value: image.path);
       emit(ImageSuccessState());
     }).catchError((error) {
       emit(ImageFailedState());

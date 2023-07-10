@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Timer(const Duration(milliseconds: 3500), () {
       print(MyCache.getString(key: MyCacheKeys.profileId));
-      if(!cubit.checkIsShawn() || MyCache.getString(key: MyCacheKeys.profileId)=='') {
+      if(!cubit.checkIsShawn() || MyCache.getString(key: MyCacheKeys.profileId)=='0') {
         Navigator.pushNamedAndRemoveUntil(
           context, screens.onBoardingScreenFirst, (route) => false);
       }

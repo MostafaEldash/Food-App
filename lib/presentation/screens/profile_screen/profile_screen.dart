@@ -18,10 +18,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   File image = File(MyCache.getString(key: MyCacheKeys.profileImage));
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
+
 
   @override
   Widget build(BuildContext context) {
