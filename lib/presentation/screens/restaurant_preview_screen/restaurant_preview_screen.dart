@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_ninja/core/constants_methods.dart';
 import 'package:sizer/sizer.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../../../business_logic/food_cubit/food_cubit.dart';
-import '../../../core/my_cache_keys.dart';
-import '../../../data/local/mycache.dart';
 import '../../../data/responses/restaurant_response/restaurant_response.dart';
 import '../../styles/colors.dart';
 import '../../views/food_list_item.dart';
@@ -22,11 +19,11 @@ class RestaurantPreviewScreen extends StatefulWidget {
 }
 
 class _RestaurantPreviewScreenState extends State<RestaurantPreviewScreen> {
-
   late FoodCubit foodCubit;
 
   void didChangeDependencies() {
     foodCubit = FoodCubit.get(context)..getAllFood();
+    print(widget.restaurantsData.lat);
     super.didChangeDependencies();
   }
 
@@ -87,7 +84,6 @@ class _RestaurantPreviewScreenState extends State<RestaurantPreviewScreen> {
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.w),
-
                   child: Row(
                     children: [
                       const Icon(
@@ -96,8 +92,8 @@ class _RestaurantPreviewScreenState extends State<RestaurantPreviewScreen> {
                       ),
                       DefaultText(
                         textColor: Colors.grey,
-                        text:
-                            "${distanceInKm(MyCache.getDouble(key: MyCacheKeys.lat), MyCache.getDouble(key: MyCacheKeys.long), double.parse(widget.restaurantsData.lat), double.parse(widget.restaurantsData.long)).toString()} Km",
+                        text:'',
+                            // "${distanceInKm(MyCache.getDouble(key: MyCacheKeys.lat), MyCache.getDouble(key: MyCacheKeys.long), double.parse(widget.restaurantsData.lat), double.parse(widget.restaurantsData.long)).toString()} Km",
                         textSize: 10.sp,
                       ),
                       const Icon(
@@ -111,16 +107,15 @@ class _RestaurantPreviewScreenState extends State<RestaurantPreviewScreen> {
                       )
                     ],
                   ),
-
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w,vertical: 1.h),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 1.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding:
-                        EdgeInsets.symmetric(vertical: 1.h, horizontal: 5.w),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 1.h, horizontal: 5.w),
                         child: DefaultText(
                           text: 'Popular Menu',
                           weight: FontWeight.bold,
@@ -128,8 +123,8 @@ class _RestaurantPreviewScreenState extends State<RestaurantPreviewScreen> {
                         ),
                       ),
                       Padding(
-                        padding:
-                        EdgeInsets.symmetric(vertical: 1.h, horizontal: 5.w),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 1.h, horizontal: 5.w),
                         child: InkWell(
                           onTap: () {
                             Navigator.pushNamed(
@@ -137,7 +132,8 @@ class _RestaurantPreviewScreenState extends State<RestaurantPreviewScreen> {
                           },
                           child: const DefaultText(
                             text: 'view',
-                            style: TextStyle(decoration: TextDecoration.underline),
+                            style:
+                                TextStyle(decoration: TextDecoration.underline),
                             textColor: backButtonArrow,
                           ),
                         ),
@@ -146,7 +142,7 @@ class _RestaurantPreviewScreenState extends State<RestaurantPreviewScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5.w,vertical: 2.h),
+                  padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
                   child: SizedBox(
                     height: 10.h,
                     child: BlocBuilder<FoodCubit, FoodState>(
@@ -163,11 +159,12 @@ class _RestaurantPreviewScreenState extends State<RestaurantPreviewScreen> {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) => FoodListItem(
                               index: index,
-                              allFoodData: foodCubit.allFoodResponse.data[index],
+                              allFoodData:
+                                  foodCubit.allFoodResponse.data[index],
                             ),
                             itemCount: foodCubit.allFoodResponse.data.length,
                             separatorBuilder: (context, index) =>
-                            const VerticalDivider(
+                                const VerticalDivider(
                               color: Colors.transparent,
                             ),
                           );

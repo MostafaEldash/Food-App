@@ -6,6 +6,7 @@ import 'package:food_ninja/presentation/screens/cart_screen/rate_driver.dart';
 import 'package:food_ninja/presentation/screens/cart_screen/rate_food_screen.dart';
 import 'package:food_ninja/presentation/screens/cart_screen/rate_restaurant.dart';
 import 'package:food_ninja/presentation/screens/edit_payment_screen/edit_payment_screen.dart';
+import 'package:food_ninja/presentation/screens/filter_screen/filter_screen.dart';
 import 'package:food_ninja/presentation/screens/food_preview_screen/food_preview_screen.dart';
 import 'package:food_ninja/presentation/screens/notifications_screen/notification_screen.dart';
 import 'package:food_ninja/presentation/screens/popular_restaurants_screen/popular_restaurants_screen.dart';
@@ -121,13 +122,14 @@ class AppRouter {
       case screens.popularRestaurantsScreen:
         return MaterialPageRoute(
             builder: (_) => const PopularRestaurantsScreen());
-        case screens.editPaymentScreen:
-        return MaterialPageRoute(
-            builder: (_) => const EditPaymentScreen());
+      case screens.editPaymentScreen:
+        return MaterialPageRoute(builder: (_) => const EditPaymentScreen());
       case screens.popularMenuScreen:
         return MaterialPageRoute(builder: (_) => const PopularMenuScreen());
       case screens.orderMapScreen:
         return MaterialPageRoute(builder: (_) => const OrderMapScreen());
+      case screens.filterScreen:
+        return MaterialPageRoute(builder: (_) => const FilterScreen());
       default:
         return null;
     }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:food_ninja/business_logic/search_cubit/search_cubit.dart';
 import 'package:sizer/sizer.dart';
 import '../../../business_logic/app_cubit.dart';
 import '../../../business_logic/food_cubit/food_cubit.dart';
+import '../../../business_logic/food_search_cubit/food_search_cubit.dart';
 import '../../../business_logic/restaurants_cubit/restaurants_cubit.dart';
 import '../../styles/colors.dart';
 import '../../views/food_list_item.dart';
@@ -22,10 +22,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late RestaurantsCubit restaurantsCubit;
   late FoodCubit foodCubit;
-  late SearchCubit searchCubit;
+  late FoodSearchCubit searchCubit;
+  TextEditingController searchController = TextEditingController();
   @override
   void didChangeDependencies() {
-    searchCubit = SearchCubit.get(context);
+    searchCubit = FoodSearchCubit.get(context);
     restaurantsCubit = RestaurantsCubit.get(context)..getRestaurants();
     foodCubit = FoodCubit.get(context)..getAllFood();
     super.didChangeDependencies();
@@ -57,32 +58,71 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 8.h, right: 2.h),
-                    child: MaterialButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                              context, screens.notificationsScreen);
-                        },
-                        color: Theme.of(context).colorScheme.primary,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.sp)),
-                        child:
-                            SvgPicture.asset('assets/Icon Notifiaction.svg')),
+                    child: SizedBox(
+                      width: 15.w,
+                      height: 8.h,
+                      child: MaterialButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, screens.notificationsScreen);
+                          },
+                          color: Theme.of(context).colorScheme.primary,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.sp)),
+                          child:
+                              SvgPicture.asset('assets/icon_notification.svg')),
+                    ),
                   )
                 ],
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
-                child: SearchBar(
-                    hintText: 'What do you want to order?',
-                    onTap: () {
-                      Navigator.pushNamed(context, screens.searchScreen);
-                    },
-                    backgroundColor: MaterialStatePropertyAll(
-                        Theme.of(context).colorScheme.primary),
-                    leading: const Icon(
-                      Icons.search,
-                      color: backButtonArrow,
-                    ),),
+                padding: EdgeInsets.symmetric(horizontal: 5.w,vertical: 2.h),
+                child: Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, screens.searchScreen);
+                      },
+                      child: Container(
+                        height: 8.h,
+                        width: 70.w,
+                        decoration: BoxDecoration(
+                          color: backGroundColorBackButton.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(15.sp),
+
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Icon(
+                              Icons.search,
+                              color: backButtonArrow,
+                            ),
+                            DefaultText(
+                              text: 'What do you want to order?',
+                              textColor: backButtonArrow,
+                              textSize: 10.sp,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 8.h,
+                      width: 15.w,
+                      margin: EdgeInsets.only(left: 2.w),
+                      decoration: BoxDecoration(
+                          color: backGroundColorBackButton.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(15.sp)),
+                      child: MaterialButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, screens.filterScreen);
+                        },
+                        child: SvgPicture.asset('assets/Filter.svg'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
@@ -201,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               DefaultText(
                                 text: 'Error Occurred!',
-                                textColor: Colors.white,
+                                textColor: Colors.grey,
                                 textSize: 25.sp,
                                 weight: FontWeight.bold,
                               ),
@@ -230,8 +270,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         EdgeInsets.symmetric(vertical: 1.h, horizontal: 5.w),
                     child: InkWell(
                       onTap: () {
-                        Navigator.pushNamed(
-                            context, screens.popularMenuScreen);
+                        Navigator.pushNamed(context, screens.popularMenuScreen);
                       },
                       child: const DefaultText(
                         text: 'view',

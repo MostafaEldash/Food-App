@@ -25,6 +25,18 @@ class MyDio{
     return await dio!.get(endPoint, queryParameters: query);
   }
 
+  static Future<Response> getCategoryData({
+    required String endPoint,
+    Map<String, dynamic>? query,
+  }) async{
+    dio!.options.headers['Authorization'] = 'Bearer $bearerToken';
+    dio!.options.headers['Accept'] = 'application/json';
+    return await dio!.get(endPoint, queryParameters: query);
+  }
+
+
+
+
   static Future<Response> postData({
     required String endPoint,
     Map<String, dynamic>? query,

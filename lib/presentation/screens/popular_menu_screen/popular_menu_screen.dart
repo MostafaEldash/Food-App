@@ -5,7 +5,7 @@ import 'package:sizer/sizer.dart';
 import 'package:food_ninja/core/screens_names.dart' as screens;
 import '../../../business_logic/app_cubit.dart';
 import '../../../business_logic/food_cubit/food_cubit.dart';
-import '../../../business_logic/search_cubit/search_cubit.dart';
+import '../../../business_logic/food_search_cubit/food_search_cubit.dart';
 import '../../styles/colors.dart';
 import '../../views/food_list_item.dart';
 import '../../widgets/default_back_button.dart';
@@ -20,10 +20,10 @@ class PopularMenuScreen extends StatefulWidget {
 
 class _PopularMenuScreenState extends State<PopularMenuScreen> {
   late FoodCubit foodCubit;
-  late SearchCubit searchCubit;
+  late FoodSearchCubit searchCubit;
   @override
   void didChangeDependencies() {
-    searchCubit = SearchCubit.get(context);
+    searchCubit = FoodSearchCubit.get(context);
     foodCubit = FoodCubit.get(context)..getAllFood();
     super.didChangeDependencies();
   }
@@ -70,7 +70,7 @@ class _PopularMenuScreenState extends State<PopularMenuScreen> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.sp)),
                           child:
-                              SvgPicture.asset('assets/Icon Notifiaction.svg')),
+                              SvgPicture.asset('assets/icon_notification.svg')),
                     )
                   ],
                 ),

@@ -20,9 +20,13 @@ class ChatCubit extends Cubit<ChatState> {
     this.uri = uri;
   }
 
-  int progress=0;
+  double progress = 0;
 
   setProgress(int progress){
-    this.progress=progress;
+    this.progress = progress / 100;
+    if(this.progress<1)
+      emit(ChatLoadingState());
+    else
+      emit(ChatSuccessState());
   }
 }

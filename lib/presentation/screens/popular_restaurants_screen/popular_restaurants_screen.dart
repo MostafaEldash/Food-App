@@ -5,8 +5,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:food_ninja/core/screens_names.dart' as screens;
 import '../../../business_logic/app_cubit.dart';
+import '../../../business_logic/food_search_cubit/food_search_cubit.dart';
 import '../../../business_logic/restaurants_cubit/restaurants_cubit.dart';
-import '../../../business_logic/search_cubit/search_cubit.dart';
 import '../../styles/colors.dart';
 import '../../views/restaurant_list_item.dart';
 import '../../widgets/default_back_button.dart';
@@ -22,10 +22,10 @@ class PopularRestaurantsScreen extends StatefulWidget {
 
 class _PopularRestaurantsScreenState extends State<PopularRestaurantsScreen> {
   late RestaurantsCubit restaurantsCubit;
-  late SearchCubit searchCubit;
+  late FoodSearchCubit searchCubit;
   @override
   void didChangeDependencies() {
-    searchCubit = SearchCubit.get(context);
+    searchCubit = FoodSearchCubit.get(context);
     restaurantsCubit = RestaurantsCubit.get(context)..getRestaurants();
     super.didChangeDependencies();
   }
@@ -72,7 +72,7 @@ class _PopularRestaurantsScreenState extends State<PopularRestaurantsScreen> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.sp)),
                           child:
-                              SvgPicture.asset('assets/Icon Notifiaction.svg')),
+                              SvgPicture.asset('assets/icon_notification.svg')),
                     )
                   ],
                 ),

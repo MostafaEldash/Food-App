@@ -30,3 +30,4 @@ const orderMapScreen = 'order_map_screen';
 const popularRestaurantsScreen = 'popular_restaurants_screen';
 const popularMenuScreen = 'popular_menu_screen';
 const editPaymentScreen = 'edit_payment_screen';
+const filterScreen = 'filter_screen';

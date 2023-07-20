@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_ninja/business_logic/restaurant_search_cubit/restaurant_search_cubit.dart';
 import 'package:food_ninja/presentation/router/app_router.dart';
 import 'package:food_ninja/presentation/styles/themes.dart';
 import 'package:sizer/sizer.dart';
 import 'business_logic/app_cubit.dart';
+import 'business_logic/category_cubit/category_cubit.dart';
 import 'business_logic/chat_cubit/chat_cubit.dart';
 import 'business_logic/food_cubit/food_cubit.dart';
+import 'business_logic/food_search_cubit/food_search_cubit.dart';
 import 'business_logic/login_cubit/login_cubit.dart';
 import 'business_logic/order_cubit/order_cubit.dart';
 import 'business_logic/registration_cubit/registration_cubit.dart';
 import 'business_logic/restaurants_cubit/restaurants_cubit.dart';
-import 'business_logic/search_cubit/search_cubit.dart';
 import 'data/data_providers/my_dio.dart';
 import 'data/local/mycache.dart';
 
@@ -54,8 +56,15 @@ class MyApp extends StatelessWidget {
                 create: (context) => ChatCubit(),
               ),
               BlocProvider(
-                create: (context) => SearchCubit(),
+                create: (context) => FoodSearchCubit(),
               ),
+              BlocProvider(
+                create: (context) => CategoryCubit(),
+              ),
+              BlocProvider(
+                create: (context) => RestaurantSearchCubit(),
+              ),
+
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,

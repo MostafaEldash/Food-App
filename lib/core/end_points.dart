@@ -8,3 +8,5 @@ const profileEndPoint='/auth/profile';
 const createOrderEndPoint='/order/create';
 const profileImageEndPoint='/auth/user/update/';
 const foodFilterEndPoint='/filter/food/';
+const restaurantFilterEndPoint='/filter/restaurent/';
+const categoryEndPoint='/category';
